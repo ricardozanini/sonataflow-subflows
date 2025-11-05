@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CountryCodePayload",
+  "type": "object",
+  "required": ["country"],
+  "properties": {
+    "country": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code (e.g., US, CA, BR, ES).",
+      "minLength": 2,
+      "maxLength": 2,
+      "pattern": "^[A-Z]{2}$"
+    }
+  },
+  "examples": [
+    { "country": "US" },
+    { "country": "CA" },
+    { "country": "BR" },
+    { "country": "ES" }
+  ]
+}

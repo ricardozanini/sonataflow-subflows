@@ -1,0 +1,24 @@
+id: shippinghandling
+name: Shipping Handling
+start: ShippingHandling
+version: "1.0"
+# in src/main/resources
+dataInputSchema: input-schemas/shipping-handling.json
+states:
+  - name: ShippingHandling
+    type: switch
+    dataConditions:
+      - condition: "${ .country == \"US\" }"
+        transition: DomesticShipping
+      - condition: "${ .country != \"US\" }"
+        transition: InternationalShipping
+  - name: DomesticShipping
+    type: inject
+    data:
+      shipping: "domestic"
+    end: true
+  - name: InternationalShipping
+    type: inject
+    data:
+      shipping: "international"
+    end: true

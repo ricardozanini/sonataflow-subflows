@@ -1,0 +1,465 @@
+---
+openapi: 3.0.3
+info:
+  title: sonataflow-subflows API
+  version: 1.0-SNAPSHOT
+tags:
+  - name: fraudhandling
+  - name: shippinghandling
+servers:
+  - url: http://localhost:8080
+paths:
+  /fraudhandling:
+    get:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: getResources_fraudhandling
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/JsonNodeModelOutput"
+    post:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: createResource_fraudhandling
+      parameters:
+        - name: businessKey
+          in: query
+          schema:
+            default: ""
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: TotalPayload
+              required:
+                - total
+              type: object
+              properties:
+                total:
+                  description: Required total value.
+                  type: integer
+      responses:
+        "200":
+          description: OK
+  /fraudhandling/schema:
+    get:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: getResourceSchema_fraudhandling
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: { }
+  /fraudhandling/{id}:
+    get:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: getResource_fraudhandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonNodeModelOutput"
+    put:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: updateModel_fraudhandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Total Payload
+              required:
+                - total
+              type: object
+              properties:
+                total:
+                  description: Required total value.
+                  type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonNodeModelOutput"
+    delete:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: deleteResource_fraudhandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonNodeModelOutput"
+    patch:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: updateModelPartial_fraudhandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Total Payload
+              required:
+                - total
+              type: object
+              properties:
+                total:
+                  description: Required total value.
+                  type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonNodeModelOutput"
+  /fraudhandling/{id}/tasks:
+    get:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: getTasks_fraudhandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: group
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: user
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TaskModel"
+  /messaging/topics:
+    get:
+      tags:
+        - Quarkus Topics Information Resource
+      operationId: getTopics
+      responses:
+        "200":
+          description: OK
+  /shippinghandling:
+    get:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: getResources_shippinghandling
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/JsonNodeModelOutput"
+    post:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: createResource_shippinghandling
+      parameters:
+        - name: businessKey
+          in: query
+          schema:
+            default: ""
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: CountryCodePayload
+              required:
+                - country
+              type: object
+              properties:
+                country:
+                  description: "ISO 3166-1 alpha-2 country code (e.g., US, CA, BR,\
+                    \ ES)."
+                  maxLength: 2
+                  minLength: 2
+                  pattern: "^[A-Z]{2}$"
+                  type: string
+      responses:
+        "200":
+          description: OK
+  /shippinghandling/schema:
+    get:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: getResourceSchema_shippinghandling
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: { }
+  /shippinghandling/{id}:
+    get:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: getResource_shippinghandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonNodeModelOutput"
+    put:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: updateModel_shippinghandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Country Code Payload
+              required:
+                - country
+              type: object
+              properties:
+                country:
+                  description: "ISO 3166-1 alpha-2 country code (e.g., US, CA, BR,\
+                    \ ES)."
+                  maxLength: 2
+                  minLength: 2
+                  pattern: "^[A-Z]{2}$"
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonNodeModelOutput"
+    delete:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: deleteResource_shippinghandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonNodeModelOutput"
+    patch:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: updateModelPartial_shippinghandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Country Code Payload
+              required:
+                - country
+              type: object
+              properties:
+                country:
+                  description: "ISO 3166-1 alpha-2 country code (e.g., US, CA, BR,\
+                    \ ES)."
+                  maxLength: 2
+                  minLength: 2
+                  pattern: "^[A-Z]{2}$"
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonNodeModelOutput"
+  /shippinghandling/{id}/tasks:
+    get:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: getTasks_shippinghandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: group
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: user
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TaskModel"
+components:
+  schemas:
+    JsonNodeModelInput:
+      type: object
+      properties:
+        workflowdata: { }
+        additionalProperties:
+          type: object
+          additionalProperties: { }
+    JsonNodeModelOutput:
+      type: object
+      properties:
+        id:
+          type: string
+        workflowdata: { }
+    TaskModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        state:
+          format: int32
+          type: integer
+        phase:
+          type: string
+        phaseStatus:
+          type: string
+        parameters: { }
+        results: { }
+    CountryCodePayload:
+      title: Country Code Payload
+      required:
+        - country
+      type: object
+      properties:
+        country:
+          description: "ISO 3166-1 alpha-2 country code (e.g., US, CA, BR, ES)."
+          maxLength: 2
+          minLength: 2
+          pattern: "^[A-Z]{2}$"
+          type: string
+    TotalPayload:
+      title: Total Payload
+      required:
+        - total
+      type: object
+      properties:
+        total:
+          description: Required total value.
+          type: integer
