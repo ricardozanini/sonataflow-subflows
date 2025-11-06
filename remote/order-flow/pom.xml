@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.acme.sonataflow.subflows</groupId>
+        <artifactId>sonataflow-subflows-remote</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>sonataflow-subflows-remote-order</artifactId>
+    <name>SonataFlow :: Subflows Example :: Remote :: Order</name>
+
+    <properties>
+        <version.maven.dependency.plugin>3.6.1</version.maven.dependency.plugin>
+        <version.awaitility>4.2.0</version.awaitility>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.acme.sonataflow.subflows</groupId>
+            <artifactId>sonataflow-subflows-remote-shipping</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.acme.sonataflow.subflows</groupId>
+            <artifactId>sonataflow-subflows-remote-fraud</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${version.awaitility}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-local-runners</id>
+                        <phase>test-compile</phase>
+                        <goals><goal>copy-resources</goal></goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/it-binaries</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/../fraud-flow/target</directory>
+                                    <includes><include>*-runner.jar</include></includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>${project.basedir}/../shipping-flow/target</directory>
+                                    <includes><include>*-runner.jar</include></includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

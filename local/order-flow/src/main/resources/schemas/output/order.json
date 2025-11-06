@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderOutPayload",
+  "type": "object",
+  "required": ["id", "country", "total", "description", "shipping"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "UUID for the record.",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+    },
+    "country": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code (e.g., US, CA, BR, ES).",
+      "minLength": 2,
+      "maxLength": 2,
+      "pattern": "^[A-Z]{2}$"
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total amount."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Item description."
+    },
+    "shipping": {
+      "type": "string",
+      "description": "Whether or not shipping is handled internationally or domestic",
+      "enum": ["domestic", "international"]
+    },
+    "fraudEvaluation": {
+      "type": "boolean",
+      "description": "Whether or not the order requires fraud evaluation"
+    }
+  },
+  "examples": [
+    {
+      "id": "f0643c68-609c-48aa-a820-5df423fa4fe0",
+      "country": "BR",
+      "total": 10000,
+      "description": "iPhone 12",
+      "fraudEvaluation": true,
+      "shipping": "international"
+    }
+  ]
+}

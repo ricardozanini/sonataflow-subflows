@@ -1,0 +1,349 @@
+---
+openapi: 3.0.3
+info:
+  title: sonataflow-subflows-remote-fraud API
+  version: 1.0-SNAPSHOT
+tags:
+  - name: fraudhandling
+paths:
+  /fraudhandling:
+    get:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: getResources_fraudhandling
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/JsonNodeModelOutput"
+    post:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: createResource_fraudhandling
+      parameters:
+        - name: businessKey
+          in: query
+          schema:
+            default: ""
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: FraudInPayload
+              required:
+                - total
+              type: object
+              properties:
+                total:
+                  description: Required total value.
+                  type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: FraudOutPayload
+                properties:
+                  workflowdata:
+
+                    required:
+                      - total
+                    type: object
+                    properties:
+                      total:
+                        description: Required total value.
+                        type: integer
+                      fraudEvaluation:
+                        description: Whether or not the order requires fraud evaluation
+                        type: boolean
+                  id:
+                    description: Process instance id
+                    type: string
+  /fraudhandling/schema:
+    get:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: getResourceSchema_fraudhandling
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+  /fraudhandling/{id}:
+    get:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: getResource_fraudhandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: FraudOutPayload
+                properties:
+                  workflowdata:
+
+                    required:
+                      - total
+                    type: object
+                    properties:
+                      total:
+                        description: Required total value.
+                        type: integer
+                      fraudEvaluation:
+                        description: Whether or not the order requires fraud evaluation
+                        type: boolean
+                  id:
+                    description: Process instance id
+                    type: string
+    put:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: updateModel_fraudhandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: FraudInPayload
+              required:
+                - total
+              type: object
+              properties:
+                total:
+                  description: Required total value.
+                  type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: FraudOutPayload
+                properties:
+                  workflowdata:
+
+                    required:
+                      - total
+                    type: object
+                    properties:
+                      total:
+                        description: Required total value.
+                        type: integer
+                      fraudEvaluation:
+                        description: Whether or not the order requires fraud evaluation
+                        type: boolean
+                  id:
+                    description: Process instance id
+                    type: string
+    delete:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: deleteResource_fraudhandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: FraudOutPayload
+                properties:
+                  workflowdata:
+
+                    required:
+                      - total
+                    type: object
+                    properties:
+                      total:
+                        description: Required total value.
+                        type: integer
+                      fraudEvaluation:
+                        description: Whether or not the order requires fraud evaluation
+                        type: boolean
+                  id:
+                    description: Process instance id
+                    type: string
+    patch:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: updateModelPartial_fraudhandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: FraudInPayload
+              required:
+                - total
+              type: object
+              properties:
+                total:
+                  description: Required total value.
+                  type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: FraudOutPayload
+                properties:
+                  workflowdata:
+
+                    required:
+                      - total
+                    type: object
+                    properties:
+                      total:
+                        description: Required total value.
+                        type: integer
+                      fraudEvaluation:
+                        description: Whether or not the order requires fraud evaluation
+                        type: boolean
+                  id:
+                    description: Process instance id
+                    type: string
+  /fraudhandling/{id}/tasks:
+    get:
+      tags:
+        - fraudhandling
+      summary: fraudhandling
+      description: ""
+      operationId: getTasks_fraudhandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: group
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: user
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TaskModel"
+  /messaging/topics:
+    get:
+      tags:
+        - Quarkus Topics Information Resource
+      operationId: getTopics
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    JsonNodeModelInput:
+      type: object
+      properties:
+        workflowdata: {}
+        additionalProperties:
+          type: object
+          additionalProperties: {}
+    JsonNodeModelOutput:
+      type: object
+      properties:
+        id:
+          type: string
+        workflowdata: {}
+    TaskModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        state:
+          format: int32
+          type: integer
+        phase:
+          type: string
+        phaseStatus:
+          type: string
+        parameters: {}
+        results: {}
+    FraudInPayload:
+      title: FraudInPayload
+      required:
+        - total
+      type: object
+      properties:
+        total:
+          description: Required total value.
+          type: integer
+    FraudOutPayload:
+      title: FraudOutPayload
+      properties:
+        workflowdata:
+
+          required:
+            - total
+          type: object
+          properties:
+            total:
+              description: Required total value.
+              type: integer
+            fraudEvaluation:
+              description: Whether or not the order requires fraud evaluation
+              type: boolean
+        id:
+          description: Process instance id
+          type: string

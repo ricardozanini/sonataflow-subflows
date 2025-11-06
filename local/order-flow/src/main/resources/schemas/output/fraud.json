@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FraudOutPayload",
+  "type": "object",
+  "required": ["total"],
+  "properties": {
+    "total": {
+      "type": "integer",
+      "description": "Required total value."
+    },
+    "fraudEvaluation": {
+      "type": "boolean",
+      "description": "Whether or not the order requires fraud evaluation"
+    }
+  },
+  "examples": [
+    { "total": 0, "fraudEvaluation": true },
+    { "total": 42 }
+  ]
+}

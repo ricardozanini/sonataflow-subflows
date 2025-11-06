@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ShippingOutPayload",
+  "type": "object",
+  "required": ["shipping"],
+  "properties": {
+    "shipping": {
+      "type": "string",
+      "description": "Whether or not shipping is handled internationally or domestic",
+      "enum": ["domestic", "international"]
+    }
+  },
+  "examples": [
+    { "shipping": "domestic" },
+    { "shipping": "international" }
+  ]
+}

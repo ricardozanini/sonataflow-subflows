@@ -1,0 +1,351 @@
+---
+openapi: 3.0.3
+info:
+  title: sonataflow-subflows-remote-shipping API
+  version: 1.0-SNAPSHOT
+tags:
+  - name: shippinghandling
+paths:
+  /messaging/topics:
+    get:
+      tags:
+        - Quarkus Topics Information Resource
+      operationId: getTopics
+      responses:
+        "200":
+          description: OK
+  /shippinghandling:
+    get:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: getResources_shippinghandling
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/JsonNodeModelOutput"
+    post:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: createResource_shippinghandling
+      parameters:
+        - name: businessKey
+          in: query
+          schema:
+            default: ""
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: ShippingInPayload
+              required:
+                - country
+              type: object
+              properties:
+                country:
+                  description: "ISO 3166-1 alpha-2 country code (e.g., US, CA, BR,\
+                    \ ES)."
+                  maxLength: 2
+                  minLength: 2
+                  pattern: "^[A-Z]{2}$"
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: ShippingOutPayload
+                properties:
+                  workflowdata:
+
+                    required:
+                      - shipping
+                    type: object
+                    properties:
+                      shipping:
+                        description: Whether or not shipping is handled internationally
+                          or domestic
+                        type: string
+                  id:
+                    description: Process instance id
+                    type: string
+  /shippinghandling/schema:
+    get:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: getResourceSchema_shippinghandling
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+  /shippinghandling/{id}:
+    get:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: getResource_shippinghandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: ShippingOutPayload
+                properties:
+                  workflowdata:
+
+                    required:
+                      - shipping
+                    type: object
+                    properties:
+                      shipping:
+                        description: Whether or not shipping is handled internationally
+                          or domestic
+                        type: string
+                  id:
+                    description: Process instance id
+                    type: string
+    put:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: updateModel_shippinghandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: ShippingInPayload
+              required:
+                - country
+              type: object
+              properties:
+                country:
+                  description: "ISO 3166-1 alpha-2 country code (e.g., US, CA, BR,\
+                    \ ES)."
+                  maxLength: 2
+                  minLength: 2
+                  pattern: "^[A-Z]{2}$"
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: ShippingOutPayload
+                properties:
+                  workflowdata:
+
+                    required:
+                      - shipping
+                    type: object
+                    properties:
+                      shipping:
+                        description: Whether or not shipping is handled internationally
+                          or domestic
+                        type: string
+                  id:
+                    description: Process instance id
+                    type: string
+    delete:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: deleteResource_shippinghandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: ShippingOutPayload
+                properties:
+                  workflowdata:
+
+                    required:
+                      - shipping
+                    type: object
+                    properties:
+                      shipping:
+                        description: Whether or not shipping is handled internationally
+                          or domestic
+                        type: string
+                  id:
+                    description: Process instance id
+                    type: string
+    patch:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: updateModelPartial_shippinghandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: ShippingInPayload
+              required:
+                - country
+              type: object
+              properties:
+                country:
+                  description: "ISO 3166-1 alpha-2 country code (e.g., US, CA, BR,\
+                    \ ES)."
+                  maxLength: 2
+                  minLength: 2
+                  pattern: "^[A-Z]{2}$"
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: ShippingOutPayload
+                properties:
+                  workflowdata:
+
+                    required:
+                      - shipping
+                    type: object
+                    properties:
+                      shipping:
+                        description: Whether or not shipping is handled internationally
+                          or domestic
+                        type: string
+                  id:
+                    description: Process instance id
+                    type: string
+  /shippinghandling/{id}/tasks:
+    get:
+      tags:
+        - shippinghandling
+      summary: shippinghandling
+      description: ""
+      operationId: getTasks_shippinghandling
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: group
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: user
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TaskModel"
+components:
+  schemas:
+    JsonNodeModelInput:
+      type: object
+      properties:
+        workflowdata: {}
+        additionalProperties:
+          type: object
+          additionalProperties: {}
+    JsonNodeModelOutput:
+      type: object
+      properties:
+        id:
+          type: string
+        workflowdata: {}
+    TaskModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        state:
+          format: int32
+          type: integer
+        phase:
+          type: string
+        phaseStatus:
+          type: string
+        parameters: {}
+        results: {}
+    ShippingOutPayload:
+      title: ShippingOutPayload
+      properties:
+        workflowdata:
+
+          required:
+            - shipping
+          type: object
+          properties:
+            shipping:
+              description: Whether or not shipping is handled internationally or domestic
+              type: string
+        id:
+          description: Process instance id
+          type: string
+    ShippingInPayload:
+      title: ShippingInPayload
+      required:
+        - country
+      type: object
+      properties:
+        country:
+          description: "ISO 3166-1 alpha-2 country code (e.g., US, CA, BR, ES)."
+          maxLength: 2
+          minLength: 2
+          pattern: "^[A-Z]{2}$"
+          type: string

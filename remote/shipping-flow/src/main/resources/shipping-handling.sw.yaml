@@ -1,0 +1,27 @@
+id: shippinghandling
+name: Shipping Handling
+start: ShippingHandling
+version: "1.0"
+# Input/Output schemas are very important to correct generate the OpenAPI interfaces
+dataInputSchema: schemas/input-shipping.json
+extensions:
+  - extensionid: workflow-output-schema
+    outputSchema: schemas/output-shipping.json
+states:
+  - name: ShippingHandling
+    type: switch
+    dataConditions:
+      - condition: "${ .country == \"US\" }"
+        transition: DomesticShipping
+      - condition: "${ .country != \"US\" }"
+        transition: InternationalShipping
+  - name: DomesticShipping
+    type: inject
+    data:
+      shipping: "domestic"
+    end: true
+  - name: InternationalShipping
+    type: inject
+    data:
+      shipping: "international"
+    end: true

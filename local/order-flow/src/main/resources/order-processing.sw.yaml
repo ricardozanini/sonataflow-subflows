@@ -1,0 +1,20 @@
+id: order
+name: Order Processing
+version: "1.0"
+start: ProcessOrder
+dataInputSchema: schemas/input/order.json
+extensions:
+  - extensionid: workflow-output-schema
+    outputSchema: schemas/output/order.json
+states:
+  - name: ProcessOrder
+    type: parallel
+    branches:
+      - name: HandleFraudEvaluation
+        actions:
+          - subFlowRef: fraudhandling
+      - name: HandleShippingType
+        actions:
+          - subFlowRef: shippinghandling
+    completionType: allOf
+    end: true
