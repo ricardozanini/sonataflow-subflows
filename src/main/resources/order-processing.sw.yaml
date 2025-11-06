@@ -13,20 +13,18 @@ functions:
     operation: openapi/subflows.yaml#createResource_shippinghandling
 states:
   - name: ProcessOrder
-    type: parallel
-    branches:
-      - name: HandleFraudEvaluation
-        actions:
-          - functionRef:
-              refName: fraudEvaluation
-              arguments:
-                total: ${ .total }
-      - name: HandleShippingType
-        actions:
-          - functionRef:
-              refName: shippingType
-              arguments:
-                country: ${ .country }
-    completionType: allOf
-
+    type: operation
+    actions:
+      - functionRef:
+          refName: fraudEvaluation
+          arguments:
+            total: ${ .total }
+        actionDataFilter:
+          results: .workflowdata
+      - functionRef:
+          refName: shippingType
+          arguments:
+            country: ${ .country }
+        actionDataFilter:
+          results: .workflowdata
     end: true

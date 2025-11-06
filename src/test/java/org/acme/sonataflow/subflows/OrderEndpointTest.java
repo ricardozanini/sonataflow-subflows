@@ -17,7 +17,7 @@ class OrderEndpointTest {
         String body = """
                 {
                   "id": "f0643c68-609c-48aa-a820-5df423fa4fe0",
-                  "country": "BR",
+                  "country": "CA",
                   "total": 10000,
                   "description": "iPhone 12"
                 }
